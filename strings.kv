@@ -1,0 +1,123 @@
+WindowManager:
+    window: window
+    id: window
+    AreaWindow:
+    ConversionWindow:
+<AreaWindow>:
+    name: 'areawindow'
+	a: a
+    b: b
+    c: c
+    result: result
+	MDBoxLayout:
+		orientation: 'vertical'
+		MDToolbar:
+			title: ' Area App'
+			left_action_items: [["ruler-square", lambda x: app.menu_func.toggle_nav_drawer()]]
+		Widget:
+
+	MDTextField:
+		id: a
+		hint_text: 'Side A'
+		pos_hint: {'center_x': 0.3, 'center_y': 0.8}
+		size_hint_x: 0.22
+		helper_text: '*required'
+		helper_text_mode: 'on_error'
+		text_color: (0, 0, 0, 1)
+		input_type: 'number'
+		required: True
+
+	MDTextField:
+		id: b
+		hint_text: 'Side B'
+		pos_hint: {'center_x': 0.3, 'center_y': 0.6}
+		size_hint_x: 0.22
+		helper_text: '*required'
+		helper_text_mode: 'on_error'
+		text_color: (0, 0, 0, 1)
+		input_type: 'number'
+        required: True
+
+	MDTextField:
+		id: c
+		hint_text: 'Side C'
+		pos_hint: {'center_x': 0.3, 'center_y': 0.4}
+		size_hint_x: 0.22
+		helper_text: '*required'
+		helper_text_mode: 'on_error'
+		text_color: (0, 0, 0, 1)
+		input_type: 'number'
+        required: True
+
+	MDRoundFlatButton:
+		text: 'AREA'
+		pos_hint: {'center_x': 0.3, 'center_y': 0.25}
+        on_press: root.area()
+
+    MDFlatButton:
+        id: result
+        text: ' '
+        font_size: 30
+        size_hint: (.5, 0.1)
+        pos_hint: {'center_x': 0.35, 'center_y': 0.13}
+        disabled: True
+    MDFloatingActionButtonSpeedDial:
+        data: {'exchange.png': 'Conversion'}
+        root_button_anim: True
+        hint_animation: True
+        callback: app.to_convert
+
+
+#-------------------------------------------Conversion Window----------------------------------------------------------
+
+<ConversionWindow>:
+    name: 'conversion'
+    drop1: drop1
+    MDBoxLayout:
+		orientation: 'vertical'
+		MDToolbar:
+			title: ' Area App'
+			left_action_items: [["ruler-square", lambda x: app.menu_func.toggle_nav_drawer()]]
+        Widget:
+
+    MDRaisedButton:
+        id: drop1
+        text: 'From'
+        pos_hint: {'center_x': 0.3, 'center_y': 0.8}
+        on_release: app.dropdown1.open()
+
+    MDRaisedButton:
+        id: drop2
+        text: 'To'
+        pos_hint: {'center_x': 0.68, 'center_y': 0.8}
+        on_release: app.dropdown2.open()
+
+    MDTextField:
+		id: unity
+		hint_text: 'Value'
+		pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+		size_hint_x: 0.22
+		helper_text: '*required'
+		helper_text_mode: 'on_error'
+		text_color: (0, 0, 0, 1)
+		input_type: 'number'
+		required: True
+
+    MDRoundFlatButton:
+		text: 'CONVERT'
+		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        on_press: app.conv()
+
+    MDFlatButton:
+        id: convert
+        text: ' '
+        font_size: 30
+        size_hint: (.5, 0.1)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+        disabled: True
+
+    MDFloatingActionButtonSpeedDial:
+        data: {'vector-square': 'Area'}
+        root_button_anim: True
+        hint_animation: True
+        callback: app.to_area
