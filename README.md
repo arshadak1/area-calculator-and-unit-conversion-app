@@ -25,8 +25,8 @@ pip install kivymd
 
 ## Authors
 
- Mohammed Arshad
-ex. [@_ars_had_](https://twitter.com/_ars_had_)
+Mohammed Arshad
+[@_ars_had_](https://twitter.com/_ars_had_)
 
 ## Version History
 
