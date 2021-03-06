@@ -3,24 +3,27 @@ WindowManager:
     id: window
     AreaWindow:
     ConversionWindow:
+
+#----------------------------------------------Area Window--------------------------------------------------------------
 <AreaWindow>:
     name: 'areawindow'
 	a: a
     b: b
     c: c
-    result: result
+    result_total: result_total
+    result_last: result_last
 	MDBoxLayout:
 		orientation: 'vertical'
 		MDToolbar:
 			title: ' Area App'
-			left_action_items: [["ruler-square", lambda x: app.menu_func.toggle_nav_drawer()]]
+			left_action_items: [["ruler-square", lambda x: None]]
 		Widget:
 
 	MDTextField:
 		id: a
 		hint_text: 'Side A'
-		pos_hint: {'center_x': 0.3, 'center_y': 0.8}
-		size_hint_x: 0.22
+		pos_hint: {'center_x': 0.4, 'center_y': 0.8}
+		size_hint_x: 0.4
 		helper_text: '*required'
 		helper_text_mode: 'on_error'
 		text_color: (0, 0, 0, 1)
@@ -30,8 +33,8 @@ WindowManager:
 	MDTextField:
 		id: b
 		hint_text: 'Side B'
-		pos_hint: {'center_x': 0.3, 'center_y': 0.6}
-		size_hint_x: 0.22
+		pos_hint: {'center_x': 0.4, 'center_y': 0.65}
+		size_hint_x: 0.4
 		helper_text: '*required'
 		helper_text_mode: 'on_error'
 		text_color: (0, 0, 0, 1)
@@ -41,8 +44,8 @@ WindowManager:
 	MDTextField:
 		id: c
 		hint_text: 'Side C'
-		pos_hint: {'center_x': 0.3, 'center_y': 0.4}
-		size_hint_x: 0.22
+		pos_hint: {'center_x': 0.4, 'center_y': 0.5}
+		size_hint_x: 0.4
 		helper_text: '*required'
 		helper_text_mode: 'on_error'
 		text_color: (0, 0, 0, 1)
@@ -51,24 +54,41 @@ WindowManager:
 
 	MDRoundFlatButton:
 		text: 'AREA'
-		pos_hint: {'center_x': 0.3, 'center_y': 0.25}
+		pos_hint: {'center_x': 0.15, 'center_y': 0.35}
         on_press: root.area()
 
+    MDRoundFlatButton:
+		text: 'CLEAR ALL'
+		line_color: 1,0,0,1
+		pos_hint: {'center_x': 0.8, 'center_y': 0.35}
+        on_press: root.clear_all()
+
     MDFlatButton:
-        id: result
+        id: result_total
         text: ' '
-        font_size: 30
+        font_size: '23sp'
         size_hint: (.5, 0.1)
-        pos_hint: {'center_x': 0.35, 'center_y': 0.13}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         disabled: True
+
+    MDFlatButton:
+        id: result_last
+        text: ' '
+        font_size: '20sp'
+        size_hint: (.5, 0.3)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+        disabled: True
+
+
     MDFloatingActionButtonSpeedDial:
+        id: stack_button
         data: {'exchange.png': 'Conversion'}
         root_button_anim: True
         hint_animation: True
         callback: app.to_convert
 
 
-#-------------------------------------------Conversion Window----------------------------------------------------------
+#-------------------------------------------Conversion Window-----------------------------------------------------------
 
 <ConversionWindow>:
     name: 'conversion'
@@ -77,7 +97,7 @@ WindowManager:
 		orientation: 'vertical'
 		MDToolbar:
 			title: ' Area App'
-			left_action_items: [["ruler-square", lambda x: app.menu_func.toggle_nav_drawer()]]
+			left_action_items: [["arrow-left", lambda x: app.to_area()]]
         Widget:
 
     MDRaisedButton:
@@ -96,7 +116,7 @@ WindowManager:
 		id: unity
 		hint_text: 'Value'
 		pos_hint: {'center_x': 0.5, 'center_y': 0.65}
-		size_hint_x: 0.22
+		size_hint_x: 0.4
 		helper_text: '*required'
 		helper_text_mode: 'on_error'
 		text_color: (0, 0, 0, 1)
@@ -106,7 +126,7 @@ WindowManager:
     MDRoundFlatButton:
 		text: 'CONVERT'
 		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        on_press: app.conv()
+        on_press: app.unit_conversion()
 
     MDFlatButton:
         id: convert
@@ -115,9 +135,3 @@ WindowManager:
         size_hint: (.5, 0.1)
         pos_hint: {'center_x': 0.5, 'center_y': 0.35}
         disabled: True
-
-    MDFloatingActionButtonSpeedDial:
-        data: {'vector-square': 'Area'}
-        root_button_anim: True
-        hint_animation: True
-        callback: app.to_area
