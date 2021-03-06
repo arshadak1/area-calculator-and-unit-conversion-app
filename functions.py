@@ -1,4 +1,5 @@
 def conversion(unit1, unit2, value):
+    # function for converting unit
     if unit1 == unit2:
         return value
 
@@ -18,7 +19,7 @@ def conversion(unit1, unit2, value):
         elif unit2 == 'ares':
             return value / 100
 
-    elif unit1 == 'sq cent':
+    elif unit1 == 'cent':
         if unit2 == 'sq m':
             return value * 40.46856
         elif unit2 == 'sq ft':
